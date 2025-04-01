@@ -202,6 +202,8 @@ Splits the raw construction details into separate segments (each representing a 
     - `"colors"`: A copy of the current colors (if any).
 - Returns a list of these construction element dictionaries.
 
+PS: There is still some edge cases where the parse doesn't work well such as products that contains `body and sleeves` associated with weight (the weight is parsed but the suffix will be kept in the name e.g. product_id #1158)
+
 
 The logic behind this kind of structuration is that we will be able by the end to create a One Big Table which is a modelisation suitable for Data analysis especially if we use a column based database.
 
