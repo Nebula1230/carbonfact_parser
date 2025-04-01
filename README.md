@@ -30,6 +30,8 @@ The logic behind this kind of structuration is that we will be able by the end t
 
 The run command is the following:
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
-python main.py care_labels.csv. It will generate an output file by default called garments_parsed.json
+`python main.py care_labels.csv`.
+
+It will generate an output file by default called garments_parsed.json
