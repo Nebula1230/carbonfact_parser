@@ -25,7 +25,9 @@
     - construction: List of all construction elements in the garment
 
 Example of the output: 
+
 **Before:**
+
  #1102,JACKET,"Main: 100% polyamide, 220 g/m2. Reinforcement: 100% polyamide CORDURAÂ®, 205 g/mÂ². Lining: 100% solution dyed polyamide 65 g/mÂ². Cuff stretch: 90% polyester 10% elastane, 253 g/mÂ².  Insulation: 50% 37.5Â® polyester, 35% REPREVEÂ® recycled polyester, 15% polyester, 120 g/mÂ². Mesh: 100% polyester, 367 g/mÂ². Pocket lining: 100% polyester, 215 g/mÂ². "
 
 **After:**
