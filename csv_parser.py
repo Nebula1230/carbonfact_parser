@@ -1,32 +1,17 @@
 import csv
 import re
-from typing import List, Optional
-from pydantic import BaseModel, Field, ValidationError
-
-class Material(BaseModel):
-    fabric_type: Optional[str] = None
-    name: str
-    percentage: int
-
-class ConstructionElement(BaseModel):
-    name: str
-    colors: List[str] = Field(default_factory=list)
-    materials: List[Material]
-    weight: str
-
-class Garment(BaseModel):
-    code: str
-    category: str
-    construction: List[ConstructionElement]
+from typing import List
+from pydantic import ValidationError
+from garment_models import Material, Garment, ConstructionElement
 
 def clean_text(text: str) -> str:
-    """Enhanced cleaning with comprehensive weight normalization"""
+    """Cleaning with comprehensive weight normalization"""
     replacements = {
         "Â®": "®", "Ã©": "é", "Â²": "²", 
         "gr": "g", "Gr": "g", "GR": "g",
         "CORDURAÂ®": "CORDURA®",
         "REPREVEÂ®": "REPREVE®",
-        "g/m2": "g/m²"  # Add explicit normalization for g/m2
+        "g/m2": "g/m²"
     }
     for old, new in replacements.items():
         text = text.replace(old, new)
@@ -34,9 +19,9 @@ def clean_text(text: str) -> str:
     return re.sub(r'\s+', ' ', text).strip()
 
 def parse_construction_details(detail_text: str) -> List[dict]:
-    """Parse construction details with enhanced color and element grouping"""
+    """Parse construction details with color and element grouping"""
     elements = []
-    detail_text = clean_text(detail_text)
+    #detail_text = clean_text(detail_text)
     
     # Split segments while preserving color contexts
     segments = re.split(r'(?<!\bCol\.)(?<!\bCol)\s*[.;](?!\s*\d)', detail_text)
@@ -44,10 +29,9 @@ def parse_construction_details(detail_text: str) -> List[dict]:
     current_colors = []
     
     for segment in segments:
-        segment = segment.strip()
-        if not segment:
-            continue
-
+        if segment:
+            segment = segment.strip()
+        
         # Extract colors first
         colors, cleaned_segment = parse_colors(segment)
         current_colors = colors if colors else current_colors
@@ -71,12 +55,11 @@ def parse_construction_details(detail_text: str) -> List[dict]:
                 "weight": weight,
                 "colors": current_colors.copy()
             })
-            current_colors = []
 
     return elements
 
 def parse_materials_and_weight(material_text: str) -> tuple[List[Material], str]:
-    """Improved material parser that extracts weight from material descriptions"""
+    """ Material parser that extracts weight from material descriptions"""
     materials = []
     weight = ""
     
@@ -101,10 +84,7 @@ def parse_materials_and_weight(material_text: str) -> tuple[List[Material], str]
         part = part.strip()
         if not part:
             continue
-            
-        # Skip if this part is just a weight specification
-        if re.match(r'^\d+\s*g', part, re.IGNORECASE) and len(part.split()) <= 2:
-            continue
+
 
         match = re.match(r'(\d+)%\s*(.*)', part)
         if match:
@@ -118,15 +98,6 @@ def parse_materials_and_weight(material_text: str) -> tuple[List[Material], str]
                     weight = material_weight_match.group(1)
                 # Remove weight from material name
                 name = name.replace(material_weight_match.group(0), '').strip(' ,')
-            
-            # Handle specific location mentions in the weight
-            body_sleeves_match = re.search(r'in\s+body\s+and\s+sleeves', name)
-            if body_sleeves_match:
-                location_info = body_sleeves_match.group(0)
-                name = name.replace(location_info, '').strip()
-                # Attach the location info to the weight instead
-                if weight:
-                    weight += f" {location_info}"
             
             # Handle nested materials
             if '(' in name:

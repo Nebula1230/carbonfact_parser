@@ -462,11 +462,11 @@
           },
           {
             "fabric_type": null,
-            "name": "recycled polyester,",
+            "name": "recycled polyester,  in body and sleeves",
             "percentage": 10
           }
         ],
-        "weight": "120 g in body and sleeves"
+        "weight": "120 g"
       },
       {
         "name": "Lining",
@@ -626,11 +626,11 @@
           },
           {
             "fabric_type": null,
-            "name": "recycled polyester,",
+            "name": "recycled polyester,  in body and sleeves",
             "percentage": 10
           }
         ],
-        "weight": "120 g in body and sleeves"
+        "weight": "120 g"
       },
       {
         "name": "Lining",
@@ -685,11 +685,11 @@
           },
           {
             "fabric_type": null,
-            "name": "recycled polyester,",
+            "name": "recycled polyester,  in body and sleeves",
             "percentage": 10
           }
         ],
-        "weight": "120 g in body and sleeves"
+        "weight": "120 g"
       },
       {
         "name": "Lining",
@@ -1243,11 +1243,11 @@
           },
           {
             "fabric_type": null,
-            "name": "recycled polyester,",
+            "name": "recycled polyester,  in body and sleeves",
             "percentage": 10
           }
         ],
-        "weight": "120 g in body and sleeves"
+        "weight": "120 g"
       },
       {
         "name": "Lining",
@@ -1506,11 +1506,11 @@
           },
           {
             "fabric_type": null,
-            "name": "recycled polyester,",
+            "name": "recycled polyester,  in body and sleeves",
             "percentage": 10
           }
         ],
-        "weight": "120 g in body and sleeves"
+        "weight": "120 g"
       },
       {
         "name": "Lining",
@@ -6098,7 +6098,9 @@
       },
       {
         "name": "Contrast",
-        "colors": [],
+        "colors": [
+          "2804"
+        ],
         "materials": [
           {
             "fabric_type": null,
@@ -6162,7 +6164,9 @@
       },
       {
         "name": "Contrast",
-        "colors": [],
+        "colors": [
+          "2804"
+        ],
         "materials": [
           {
             "fabric_type": null,
@@ -6221,7 +6225,9 @@
       },
       {
         "name": "Contrast",
-        "colors": [],
+        "colors": [
+          "2804"
+        ],
         "materials": [
           {
             "fabric_type": null,
